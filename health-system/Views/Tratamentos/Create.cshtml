@@ -1,0 +1,53 @@
+@model health_system.Models.Tratamento
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Tratamento</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="qtDiasDuracao" class="control-label"></label>
+                <input asp-for="qtDiasDuracao" class="form-control" />
+                <span asp-validation-for="qtDiasDuracao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Observacao" class="control-label"></label>
+                <input asp-for="Observacao" class="form-control" />
+                <span asp-validation-for="Observacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="qtHorasIntervalo" class="control-label"></label>
+                <input asp-for="qtHorasIntervalo" class="form-control" />
+                <span asp-validation-for="qtHorasIntervalo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="qtDose" class="control-label"></label>
+                <input asp-for="qtDose" class="form-control" />
+                <span asp-validation-for="qtDose" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConsultaId" class="control-label"></label>
+                <select asp-for="ConsultaId" class ="form-control" asp-items="ViewBag.ConsultaId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="RemedioId" class="control-label"></label>
+                <select asp-for="RemedioId" class ="form-control" asp-items="ViewBag.RemedioId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

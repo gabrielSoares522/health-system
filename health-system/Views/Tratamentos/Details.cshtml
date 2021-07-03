@@ -1,0 +1,54 @@
+@model health_system.Models.Tratamento
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Tratamento</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.qtDiasDuracao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.qtDiasDuracao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Observacao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Observacao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.qtHorasIntervalo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.qtHorasIntervalo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.qtDose)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.qtDose)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Consulta)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Consulta.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Remedio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Remedio.Id)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
