@@ -11,8 +11,8 @@ namespace health_system.Controllers
 {
     public class MedicosController : Controller
     {
-        private readonly Context _context;
 
+        private readonly Context _context;
         public MedicosController(Context context)
         {
             _context = context;
@@ -26,27 +26,20 @@ namespace health_system.Controllers
         }
 
         // GET: Medicos/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        public async Task<IActionResult> Details(int? id) {
+            if (id == null) { return NotFound(); }
 
             var medico = await _context.Medicos
                 .Include(m => m.Hospital)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (medico == null)
-            {
-                return NotFound();
-            }
+
+            if (medico == null) { return NotFound(); }
 
             return View(medico);
         }
 
         // GET: Medicos/Create
-        public IActionResult Create()
-        {
+        public IActionResult Create() {
             ViewData["HospitalId"] = new SelectList(_context.Hospitais, "Id", "Id");
             return View();
         }
@@ -71,16 +64,11 @@ namespace health_system.Controllers
         // GET: Medicos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) { return NotFound(); }
 
             var medico = await _context.Medicos.FindAsync(id);
-            if (medico == null)
-            {
-                return NotFound();
-            }
+            if (medico == null) { return NotFound(); }
+
             ViewData["HospitalId"] = new SelectList(_context.Hospitais, "Id", "Id", medico.HospitalId);
             return View(medico);
         }
@@ -92,28 +80,16 @@ namespace health_system.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Email,Senha,Telefone,HospitalId")] Medico medico)
         {
-            if (id != medico.Id)
-            {
-                return NotFound();
-            }
+            if (id != medico.Id) { return NotFound(); }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
+            if (ModelState.IsValid) {
+                try {
                     _context.Update(medico);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MedicoExists(medico.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                catch (DbUpdateConcurrencyException) {
+                    if (!MedicoExists(medico.Id)) { return NotFound(); }
+                    else { throw; }
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -124,19 +100,13 @@ namespace health_system.Controllers
         // GET: Medicos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) { return NotFound(); }
 
             var medico = await _context.Medicos
                 .Include(m => m.Hospital)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (medico == null)
-            {
-                return NotFound();
-            }
 
+            if (medico == null) { return NotFound(); }
             return View(medico);
         }
 

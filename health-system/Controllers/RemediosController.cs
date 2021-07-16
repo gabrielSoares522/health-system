@@ -47,7 +47,7 @@ namespace health_system.Controllers
         // GET: Remedios/Create
         public IActionResult Create()
         {
-            ViewData["IngestaoId"] = new SelectList(_context.Ingestoes, "Id", "Id");
+            ViewData["IngestaoId"] = new SelectList(_context.Ingestoes, "Id", "Nomes");
             return View();
         }
 
