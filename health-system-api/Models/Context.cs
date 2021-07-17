@@ -4,16 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace health_system.Models
+namespace health_system_api.Models
 {
     public class Context:DbContext
     {
         public DbSet<Consulta> Consultas { get; set; }
         public DbSet<Diagnostico> Diagnosticos { get; set; }
         public DbSet<Doenca> Doencas { get; set; }
-        public DbSet<Hospital> Hospitais { get; set; }
-        public DbSet<Ingestao> Ingestoes { get; set; }
-        public DbSet<Medico> Medicos { get; set; }
+        public DbSet<Medida> Ingestoes { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Paciente> Pacientes { get; set; }
         public DbSet<Remedio> Remedios { get; set; }
         public DbSet<Tratamento> Tratamentos { get; set; }
@@ -47,23 +46,16 @@ namespace health_system.Models
                 b.HasKey(x => x.Id);
             });
 
-            builder.Entity<Hospital>(b =>
-            {
-                b.ToTable("Hospital");
-
-                b.HasKey(x => x.Id);
-            });
-
-            builder.Entity<Ingestao>(b =>
+            builder.Entity<Medida>(b =>
             {
                 b.ToTable("Ingestao");
 
                 b.HasKey(x => x.Id);
             });
 
-            builder.Entity<Medico>(b =>
+            builder.Entity<Usuario>(b =>
             {
-                b.ToTable("Medico");
+                b.ToTable("Usuario");
 
                 b.HasKey(x => x.Id);
             });

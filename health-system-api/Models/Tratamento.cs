@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace health_system.Models
+﻿namespace health_system_api.Models
 {
     public class Tratamento
     {

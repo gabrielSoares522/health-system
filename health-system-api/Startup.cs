@@ -1,3 +1,4 @@
+using health_system.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +27,7 @@ namespace health_system_api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddDbContext<Context>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
