@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using health_system_api.Models;
 
 namespace health_system_api.Models
 {
@@ -81,6 +82,7 @@ namespace health_system_api.Models
                 b.HasKey(x => x.Id);
             });
         }
+        public DbSet<health_system_api.Models.Autorizacao> Autorizacao { get; set; }
 
 }
 }
