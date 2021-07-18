@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace health_system_api.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class NewMig : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -55,8 +55,8 @@ namespace health_system_api.Migrations
                     Nome = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Senha = table.Column<string>(nullable: true),
-                    Genero = table.Column<bool>(nullable: false),
-                    Idade = table.Column<int>(nullable: false)
+                    Genero = table.Column<int>(nullable: false),
+                    Nascimento = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

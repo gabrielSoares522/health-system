@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "health-system", "health-system\health-system.csproj", "{279A0AB5-27F1-4CD6-9784-DA396D1ABDCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "health-system-api", "health-system-api\health-system-api.csproj", "{D499504E-7C5D-427B-BD21-FD6CBFFF6C1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "health-system-api", "health-system-api\health-system-api.csproj", "{D499504E-7C5D-427B-BD21-FD6CBFFF6C1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

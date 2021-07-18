@@ -114,11 +114,11 @@ namespace health_system_api.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Genero")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Idade")
+                    b.Property<int>("Genero")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("Nascimento")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Nome")
                         .HasColumnType("nvarchar(max)");

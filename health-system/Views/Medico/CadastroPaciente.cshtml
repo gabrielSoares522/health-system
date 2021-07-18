@@ -1,0 +1,44 @@
+﻿@{
+    ViewData["Title"] = "Cadastro Paciente";
+}
+
+<h1>Cadastro do Paciente</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Medico" asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label class="control-label" for="Nome">Nome</label>
+                <input id="Nome" name="Nome" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">E-mail</label>
+                <input id="Email" name="Email" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Senha</label>
+                <input id="Senha" name="Senha" type="password" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Genero</label><br>
+                <input type="radio" id="Masculino" name="Genero" value="Masculino">
+                <label for="Masculino">Masculino</label><br>
+                <input type="radio" id="Feminino" name="Genero" value="Feminino">
+                <label for="Feminino">Feminino</label><br>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Idade</label>
+                <input id="Idade" name="" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cadastrar Paciente" class="btn btn-primary" />
+            </div>
+        </form>
+        <div class="form-group">
+            <a asp-controller="Medico" asp-action="Index" class=" btn btn-primary">
+                Inicio
+            </a>
+        </div>
+    </div>
+</div>

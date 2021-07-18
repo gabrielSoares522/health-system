@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using health_system_api.Enum;
+using System;
+using System.Collections.Generic;
 
 namespace health_system_api.Models
 {
@@ -8,8 +10,8 @@ namespace health_system_api.Models
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
-        public bool Genero { get; set; }
-        public int Idade { get; set; }
+        public int Genero { get; set; }
+        public DateTime Nascimento { get; set; }
         public List<Consulta> Consultas { get; set; }
     }
 }

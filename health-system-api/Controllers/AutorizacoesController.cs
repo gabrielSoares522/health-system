@@ -24,14 +24,14 @@ namespace health_system_api.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Autorizacao>>> GetAutorizacao()
         {
-            return await _context.Autorizacao.ToListAsync();
+            return await _context.Autorizacoes.ToListAsync();
         }
 
         // GET: api/Autorizacoes/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Autorizacao>> GetAutorizacao(int id)
         {
-            var autorizacao = await _context.Autorizacao.FindAsync(id);
+            var autorizacao = await _context.Autorizacoes.FindAsync(id);
 
             if (autorizacao == null)
             {
@@ -79,7 +79,7 @@ namespace health_system_api.Controllers
         [HttpPost]
         public async Task<ActionResult<Autorizacao>> PostAutorizacao(Autorizacao autorizacao)
         {
-            _context.Autorizacao.Add(autorizacao);
+            _context.Autorizacoes.Add(autorizacao);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetAutorizacao", new { id = autorizacao.Id }, autorizacao);
@@ -89,13 +89,13 @@ namespace health_system_api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<Autorizacao>> DeleteAutorizacao(int id)
         {
-            var autorizacao = await _context.Autorizacao.FindAsync(id);
+            var autorizacao = await _context.Autorizacoes.FindAsync(id);
             if (autorizacao == null)
             {
                 return NotFound();
             }
 
-            _context.Autorizacao.Remove(autorizacao);
+            _context.Autorizacoes.Remove(autorizacao);
             await _context.SaveChangesAsync();
 
             return autorizacao;
@@ -103,7 +103,7 @@ namespace health_system_api.Controllers
 
         private bool AutorizacaoExists(int id)
         {
-            return _context.Autorizacao.Any(e => e.Id == id);
+            return _context.Autorizacoes.Any(e => e.Id == id);
         }
     }
 }

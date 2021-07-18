@@ -1,0 +1,47 @@
+﻿@model IEnumerable<health_system_api.Models.Paciente>
+
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<h1>Voce esta na area dos medicos!</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Genero)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nascimento)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Genero)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nascimento)
+                </td>
+                <td>
+                    <a asp-action="CadastroConsulta" asp-route-id="@item.Id">Realizar Consulta</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="form-group">
+    <a asp-controller="Medico" asp-action="CadastroPaciente" class=" btn btn-primary">Adicionar Paciente</a>
+</div>
