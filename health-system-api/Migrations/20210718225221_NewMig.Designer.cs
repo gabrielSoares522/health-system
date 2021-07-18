@@ -10,7 +10,7 @@ using health_system_api.Models;
 namespace health_system_api.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210718192843_NewMig")]
+    [Migration("20210718225221_NewMig")]
     partial class NewMig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
