@@ -1,11 +1,11 @@
 ﻿using health_system_api.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace health_system.Controllers
 {
@@ -18,15 +18,32 @@ namespace health_system.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
+        {
+            var context = _context.Pacientes.Include(p => p.Consultas);
+            return View(await context.ToListAsync());
+        }
+
+
+        public IActionResult CadastroPaciente()
         {
             return View();
         }
 
-        public async Task<IActionResult> CadastroPacienteAsync()
+        public async Task<IActionResult> CadastroConsulta(int? id)
         {
-            var context = _context.Pacientes.Include(p => p);
-            return View(await context.ToListAsync());
+            if (id == null) {
+                return NotFound();
+            }
+
+            var paciente = await _context.Pacientes.Include(p => p.Consultas)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (paciente == null) {
+                return NotFound();
+            }
+
+            return View(paciente);
         }
     }
 }

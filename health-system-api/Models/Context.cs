@@ -22,7 +22,7 @@ namespace health_system_api.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Cursomvc;Integrated Security=True");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=HealthSystemDB;Integrated Security=True");
             
         }
         protected override void OnModelCreating(ModelBuilder builder)
