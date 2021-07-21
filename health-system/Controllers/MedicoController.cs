@@ -42,8 +42,28 @@ namespace health_system.Controllers
             if (paciente == null) {
                 return NotFound();
             }
+            ViewData["DoencaId"] = new SelectList(_context.Doencas, "Id", "Nome");
+            ViewData["RemedioId"] = new SelectList(_context.Remedios, "Id", "Nome");
 
             return View(paciente);
         }
+        public async Task<IActionResult> HistoricoPaciente(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var paciente = await _context.Pacientes.Include(p => p.Consultas)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            
+            if (paciente == null)
+            {
+                return NotFound();
+            }
+
+            return View(paciente);
+        }
+
     }
 }
