@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace health_system
 {
@@ -20,7 +21,18 @@ namespace health_system
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
             services.AddDbContext<Context>();
+
+            services.AddAuthentication("Identity.Login")
+                .AddCookie("Identity.Login", config =>
+                {
+                    config.Cookie.Name = "Identity.Login";
+                    config.LoginPath = "/Medico";
+                    config.AccessDeniedPath = "/Home";
+                    config.ExpireTimeSpan = TimeSpan.FromHours(1);
+                });
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +53,7 @@ namespace health_system
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -48,6 +61,7 @@ namespace health_system
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

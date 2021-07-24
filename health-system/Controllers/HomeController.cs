@@ -1,8 +1,14 @@
 ﻿using health_system.Models;
 using health_system_api.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace health_system.Controllers
@@ -20,7 +26,14 @@ namespace health_system.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index","Medico");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         public IActionResult Privacy()
@@ -55,9 +68,48 @@ namespace health_system.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(string Email,string Senha)
+        public async Task<IActionResult> Login(string Email,string Senha)
         {
-            return RedirectToAction("Index", "Medico");
+            var usuario = await _context.Usuarios.Include(p => p.Consultas)
+                .FirstOrDefaultAsync(m => m.Email == Email && m.Senha == Senha);
+
+            if(usuario != null)
+            {
+                int usuarioId = usuario.Id;
+                string nome = usuario.Nome;
+
+                List<Claim> direitosAcesso = new List<Claim>
+                {
+                    new Claim(ClaimTypes.NameIdentifier,usuarioId.ToString()),
+                    new Claim(ClaimTypes.Name,nome)
+                };
+
+                var identity = new ClaimsIdentity(direitosAcesso, "Identity.Login");
+                var userPrincipal = new ClaimsPrincipal(new[] { identity });
+
+                await HttpContext.SignInAsync(userPrincipal,
+                    new AuthenticationProperties
+                    {
+                        IsPersistent = false,
+                        ExpiresUtc = DateTime.Now.AddHours(1)
+                    });
+
+                return RedirectToAction("Index", "Medico");
+            }
+            else
+            {
+                return View();
+            }
+            
+        }
+
+        public async Task<IActionResult> Logout()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                await HttpContext.SignOutAsync();
+            }
+            return RedirectToAction("Index","Home");
         }
     }
 }
