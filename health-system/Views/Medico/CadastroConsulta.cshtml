@@ -1,6 +1,5 @@
-﻿@model health_system_api.Models.Paciente
-
-@{
+﻿@{
+    var paciente = ViewData["paciente"] as health_system_api.Models.Paciente;
     ViewData["Title"] = "Consulta";
 }
 
@@ -8,29 +7,31 @@
 <hr />
 <div class="row">
     <h4>
-        @Html.DisplayFor(Model => Model.Nome)
+        paciente.Nome
     </h4>
     <div class="col-md-4">
         <form asp-controller="Medico" asp-action="Index">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label class="control-label" for="IdPaciente">Id Paciente</label>
-                <input id="IdPaciente" name="IdPaciente" type="text" class="form-control" disabled value="@Html.DisplayFor(Model => Model.Id)" />
+                <input id="IdPaciente" name="IdPaciente" type="text" class="form-control" disabled value="@paciente.Id" />
             </div>
             <div class="form-group">
                 <label class="control-label" for="IdMedico">Id Medico</label>
-                <input id="IdMedico" name="IdMedico" type="text" class="form-control" disabled value="@Html.DisplayFor(Model => Model.Id)" />
+                <input id="IdMedico" name="IdMedico" type="text" class="form-control" disabled value="1" />
             </div>
             <div class="form-group">
-                <input id="DiaConsulta" name="DiaConsulta" type="date"/>
+                <input id="DiaConsulta" name="DiaConsulta" type="date" />
             </div>
             <div class="form-group">
                 <label for="DoencaId" class="control-label">Doencas</label>
-                <select id="DoencaId" name="DoencaId" class="form-control" asp-items="ViewBag.DoencaId"></select>
+                <select id="DoencaId" name="DoencaId" class="form-control" asp-items="ViewBag.DoencaId">
+                </select>
             </div>
             <div class="form-group">
                 <label for="RemedioId" class="control-label">Remedios</label>
-                <select id="RemedioId" name="RemedioId" class="form-control" asp-items="ViewBag.RemedioId"></select>
+                <select id="RemedioId" name="RemedioId" class="form-control" asp-items="ViewBag.RemedioId">
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Cadastrar Consulta" class="btn btn-primary" />

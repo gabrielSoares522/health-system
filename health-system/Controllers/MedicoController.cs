@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace health_system.Controllers
 {
@@ -25,10 +26,10 @@ namespace health_system.Controllers
         }
 
 
-        public IActionResult CadastroPaciente()
+        /*public IActionResult CadastroPaciente()
         {
             return View();
-        }
+        }*/
 
         public async Task<IActionResult> CadastroConsulta(int? id)
         {
@@ -42,10 +43,11 @@ namespace health_system.Controllers
             if (paciente == null) {
                 return NotFound();
             }
-            ViewData["DoencaId"] = new SelectList(_context.Doencas, "Id", "Nome");
-            ViewData["RemedioId"] = new SelectList(_context.Remedios, "Id", "Nome");
+            ViewBag.DoencaId  = new SelectList(_context.Doencas, "Id", "Nome");
+            ViewBag.RemedioId = new SelectList(_context.Remedios, "Id", "Nome");
+            ViewData["paciente"] = paciente;
 
-            return View(paciente);
+            return View();
         }
         public async Task<IActionResult> HistoricoPaciente(int? id)
         {

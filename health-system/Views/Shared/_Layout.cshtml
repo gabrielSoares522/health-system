@@ -9,7 +9,19 @@
 </head>
 <body>
     <div class="container">
-        <a></a>
+        @{
+            var controller = this.ViewContext.RouteData.Values["controller"].ToString();
+            if (controller == "Medico")
+            {
+                await Html.RenderPartialAsync("_MedicoMenu");
+            }
+            else {
+                if(controller == "Administrador")
+                {
+                    await Html.RenderPartialAsync("_AdministradorMenu");
+                }
+            }
+        }
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
