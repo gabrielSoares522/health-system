@@ -24,14 +24,23 @@ namespace health_system.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index","Medico");
+                var usuario = await _context.Usuarios.Include(p => p.Consultas)
+                .FirstOrDefaultAsync(m => m.Id.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier));
+                if (usuario.AutorizacaoId == 1)
+                {
+                    return RedirectToAction("Index", "Medico");
+                }
+                else {
+                    return RedirectToAction("Index", "Administrador");
+                }
             }
             else
             {
+
                 return View();
             }
         }
@@ -94,7 +103,8 @@ namespace health_system.Controllers
                         ExpiresUtc = DateTime.Now.AddHours(1)
                     });
 
-                return RedirectToAction("Index", "Medico");
+                if(usuario.AutorizacaoId == 1) return RedirectToAction("Index", "Medico");
+                else return RedirectToAction("Index", "Administrador");
             }
             else
             {
